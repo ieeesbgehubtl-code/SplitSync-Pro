@@ -1,2 +1,15 @@
-import { http } from '../api/http';
-export const tripsService={list:()=>http.get('/trips/').then(r=>r.data),create:(data:unknown)=>http.post('/trips/',data).then(r=>r.data),invite:(tripId:string,userId:string)=>http.post(`/trips/${tripId}/invite/`,{invited_user_id:userId}).then(r=>r.data),members:(tripId:string)=>http.get(`/trips/${tripId}/members/`).then(r=>r.data),settlements:(tripId:string)=>http.get(`/expenses/trip-settlements/${tripId}/simplify/`).then(r=>r.data)};
+import { http } from "../api/http";
+export const tripsService = {
+  list: () => http.get("/trips/").then((r) => r.data),
+  create: (data: unknown) => http.post("/trips/", data).then((r) => r.data),
+  invite: (tripId: string, userId: string) =>
+    http
+      .post(`/trips/${tripId}/invite/`, { invited_user_id: userId })
+      .then((r) => r.data),
+  members: (tripId: string) =>
+    http.get(`/trips/${tripId}/members/`).then((r) => r.data),
+  settlements: (tripId: string) =>
+    http
+      .get(`/expenses/trip-settlements/${tripId}/simplify/`)
+      .then((r) => r.data),
+};

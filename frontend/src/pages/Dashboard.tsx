@@ -1,2 +1,32 @@
-import { useQuery } from '@tanstack/react-query';import { reportsService } from '../services/reports';import { AppShell } from '../components/layout/AppShell';import { StatCard } from '../components/ui/StatCard';import { MonthlyChart, CategoryPie } from '../components/charts/DashboardCharts';
-export function Dashboard(){const {data,isLoading}=useQuery({queryKey:['dashboard'],queryFn:reportsService.dashboard});const d=data?.data??{};return <AppShell><h2 className="mb-6 text-3xl font-black">Dashboard</h2><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5"><StatCard label="Trips" value={d.trip_count??0}/><StatCard label="Friends" value={d.friends_count??0}/><StatCard label="Expenses" value={d.expense_count??0}/><StatCard label="You owe" value="₹0.00"/><StatCard label="You are owed" value="₹0.00"/></div><div className="mt-6 grid gap-4 lg:grid-cols-2"><MonthlyChart data={d.monthly_expense_chart??[]}/><CategoryPie data={d.category_pie_chart??[]}/></div>{isLoading&&<p className="mt-4">Loading dashboard…</p>}</AppShell>}
+import { useQuery } from "@tanstack/react-query";
+import { reportsService } from "../services/reports";
+import { AppShell } from "../components/layout/AppShell";
+import { StatCard } from "../components/ui/StatCard";
+import {
+  MonthlyChart,
+  CategoryPie,
+} from "../components/charts/DashboardCharts";
+export function Dashboard() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: reportsService.dashboard,
+  });
+  const d = data?.data ?? {};
+  return (
+    <AppShell>
+      <h2 className="mb-6 text-3xl font-black">Dashboard</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <StatCard label="Trips" value={d.trip_count ?? 0} />
+        <StatCard label="Friends" value={d.friends_count ?? 0} />
+        <StatCard label="Expenses" value={d.expense_count ?? 0} />
+        <StatCard label="You owe" value="₹0.00" />
+        <StatCard label="You are owed" value="₹0.00" />
+      </div>
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        <MonthlyChart data={d.monthly_expense_chart ?? []} />
+        <CategoryPie data={d.category_pie_chart ?? []} />
+      </div>
+      {isLoading && <p className="mt-4">Loading dashboard…</p>}
+    </AppShell>
+  );
+}
