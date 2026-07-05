@@ -1,2 +1,2 @@
-const API=import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api';
-export async function api<T>(path:string, init:RequestInit={}){const token=localStorage.getItem('access'); const res=await fetch(`${API}${path}`,{...init,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{}) ,...init.headers}}); const json=await res.json().catch(()=>({})); if(!res.ok) throw new Error(JSON.stringify(json.errors??json)); return json as T;}
+import { http } from './http';
+export async function api<T>(path:string, init?:RequestInit){const method=(init?.method??'GET').toLowerCase(); const body=init?.body?JSON.parse(init.body as string):undefined; const res=await http.request<T>({url:path,method,data:body}); return res.data;}
