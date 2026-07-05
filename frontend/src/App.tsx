@@ -1,0 +1,3 @@
+import React from 'react';import{createRoot}from'react-dom/client';import{BrowserRouter,Routes,Route,Navigate}from'react-router-dom';import{Toaster}from'sonner';import'./index.css';import{SearchUsers,Friends,FriendRequests,TripInvitations,Notifications}from'./pages/Pages';
+function App(){return <BrowserRouter><Toaster richColors/><Routes><Route path="/" element={<Navigate to="/search"/>}/><Route path="/search" element={<SearchUsers/>}/><Route path="/friends" element={<Friends/>}/><Route path="/requests" element={<FriendRequests/>}/><Route path="/invitations" element={<TripInvitations/>}/><Route path="/notifications" element={<Notifications/>}/></Routes></BrowserRouter>}
+createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
